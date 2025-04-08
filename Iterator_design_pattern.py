@@ -1,14 +1,12 @@
-from typing import List, Protocol
+from typing import List
 
-# Interface: SongIterator
-class SongIterator(Protocol):
+class SongIterator:
     def has_next(self) -> bool:
-        ...
+        pass # just an abstract method
 
     def next(self):
-        ...
+        pass # just an abstract method
 
-# Class: Song
 class Song:
     def __init__(self, title: str, artist: str):
         self.title = title
@@ -17,8 +15,7 @@ class Song:
     def get_info(self) -> str:
         return f"{self.title} by {self.artist}"
 
-# Concrete Iterator
-class ConcreteSongIterator(SongIterator):
+class ConcreteSongIterator(SongIterator):   # implementing the SongIterator class
     def __init__(self, songs: List[Song]):
         self.songs = songs
         self.position = 0
@@ -33,13 +30,11 @@ class ConcreteSongIterator(SongIterator):
         self.position += 1
         return song
 
-# Interface: Playlist
-class Playlist(Protocol):
+class Playlist:
     def create_iterator(self) -> SongIterator:
-        ...
+        pass # just an abstract method
 
-# Concrete Playlist
-class ConcretePlaylist(Playlist):
+class ConcretePlaylist(Playlist):   # implementing the Playlist class
     def __init__(self):
         self.songs: List[Song] = []
 
@@ -49,7 +44,6 @@ class ConcretePlaylist(Playlist):
     def create_iterator(self) -> SongIterator:
         return ConcreteSongIterator(self.songs)
 
-# Client
 class Client:
     @staticmethod
     def main():
@@ -64,6 +58,5 @@ class Client:
             song = iterator.next()
             print(song.get_info())
 
-# Run the client
 if __name__ == "__main__":
     Client.main()

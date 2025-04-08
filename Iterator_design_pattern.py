@@ -51,6 +51,7 @@ class Client:
         playlist.add_song(Song("Let It Be", "The Beatles"))
         playlist.add_song(Song("Bohemian Rhapsody", "Queen"))
         playlist.add_song(Song("Imagine", "John Lennon"))
+        playlist.add_song(Song("Lilly", "Allen Walker"))
 
         iterator = playlist.create_iterator()
 
